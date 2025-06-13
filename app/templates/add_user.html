@@ -1,0 +1,68 @@
+<!--add_user.html -->
+
+{% extends 'base2.html' %}
+
+{% block title %}Dodaj użytkownika{% endblock %}
+
+{% block content %}
+
+<div class="w3-container" style="max-width:500px; margin:auto;">
+  <div class="w3-card-4 w3-white w3-animate-top" style="padding:32px 24px;">
+
+    <header class="w3-container w3-orange" style="margin:-32px -24px 24px -24px; padding:24px 16px 8px 16px;">
+      <h3 class="w3-text-black">
+        Dodaj użytkownika
+      </h3>
+    </header>
+	
+	<!-- Komunikaty flash -->
+            {% include 'flash_messages.html' %}
+	
+    <form method="POST" id="AddUserForm" autocomplete="off">
+      {{ form.hidden_tag() }}
+
+      <div class="w3-section">
+        {{ form.username.label(class="w3-text-grey") }}
+        {{ form.username(class="w3-input w3-small", placeholder="np. jan.kowalski") }}
+        {% for error in form.username.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-section">
+        {{ form.email.label(class="w3-text-grey") }}
+        {{ form.email(class="w3-input w3-small", placeholder="np. jan@domena.pl") }}
+        {% for error in form.email.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-section">
+        {{ form.password.label(class="w3-text-grey") }}
+        {{ form.password(class="w3-input w3-small", placeholder="Hasło") }}
+        {% for error in form.password.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-section">
+        {{ form.is_admin.label(class="w3-text-grey") }}
+        {{ form.is_admin(class="w3-select w3-small") }}
+        {% for error in form.is_admin.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-bar w3-margin-top">
+        <button type="submit" class="w3-bar-item w3-button w3-orange w3-hover-deep-orange w3-text-black w3-small" style="width:48%;">
+          Zapisz
+        </button>
+        <a href="{{ url_for('main.admin_users') }}" class="w3-bar-item w3-button w3-grey w3-hover-dark-grey w3-text-black w3-small" style="width:48%;">
+          Anuluj
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+form {
+    /*border-radius: 8px;*/
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: lightgrey;
+    outline: none;
+
+}
+input[type="text"],
+input[type="password"] {
+    font-size: 1rem;
+}
+
+
+textarea {
+
+	width:auto;
+	background-color: lightgrey;
+}

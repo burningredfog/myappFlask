@@ -1,0 +1,46 @@
+<!-- edit_user.html -->
+{% extends 'base2.html' %}
+
+{% block title %}Edytuj użytkownika{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-padding">
+  <h2>Edytuj użytkownika</h2>
+
+  <!-- Komunikaty flash -->
+  {% include 'flash_messages.html' %}
+
+  <form method="POST" class="w3-card-4 w3-light-grey w3-padding" style="max-width:500px;">
+    {{ form.hidden_tag() }}
+
+    <p>
+      {{ form.username.label(class="w3-text-black") }}
+      {{ form.username(class="w3-input w3-border") }}
+      {% for error in form.username.errors %}
+        <span class="w3-text-red w3-small">{{ error }}</span>
+      {% endfor %}
+    </p>
+
+    <p>
+      {{ form.email.label(class="w3-text-black") }}
+      {{ form.email(class="w3-input w3-border") }}
+      {% for error in form.email.errors %}
+        <span class="w3-text-red w3-small">{{ error }}</span>
+      {% endfor %}
+    </p>
+
+    <p>
+      {{ form.is_admin.label(class="w3-text-black") }}
+      {{ form.is_admin(class="w3-select w3-border") }}
+      {% for error in form.is_admin.errors %}
+        <span class="w3-text-red w3-small">{{ error }}</span>
+      {% endfor %}
+    </p>
+
+    <p>
+      <button type="submit" class="w3-button w3-black">Zapisz zmiany</button>
+      <a href="{{ url_for('main.admin_users') }}" class="w3-button w3-gray">Anuluj</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- flash_messages.html -->
+<!-- FLASH START -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="w3-container w3-small">
+      {% for category, message in messages %}
+        <div class="w3-panel
+            {% if category == 'success' %}w3-green
+            {% elif category == 'danger' %}w3-red
+            {% elif category == 'info' %}w3-blue
+            {% elif category == 'warning' %}w3-yellow
+            {% else %}w3-light-grey{% endif %}">
+          <p>{{ message }}</p>
+
+          {# Otwarcie modala logowania jeśli flash mówi o rejestracji #}
+          {% if category == 'success' and 'zalogować' in message %}
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                openModal();  // Otwórz modal logowania
+              });
+            </script>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+<!-- FLASH END -->

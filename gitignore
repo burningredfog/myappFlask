@@ -1,0 +1,11 @@
+# Ignore virtual environment
+venv/
+.env
+.flaskenv
+__pycache__/
+*.pyc
+instance/
+.mypy_cache/
+.idea/
+*.db
+*.sqlite

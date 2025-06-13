@@ -1,0 +1,7 @@
+{% extends 'base2.html' %}
+{% block title %}Brak dostępu{% endblock %}
+{% block content %}
+  <h2>🚫 Brak dostępu</h2>
+  <p>Nie masz uprawnień do tej strony.</p>
+  <a href="{{ url_for('main.index') }}">← Wróć</a>
+{% endblock %}

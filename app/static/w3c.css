@@ -1,0 +1,121 @@
+
+body {
+  font-family: Segoe UI;
+  /* padding:0; margin:0; */
+}
+
+.mySlides {
+	display: block;
+	padding:0; margin:0;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+	animation: fadeEffect 6s;
+}
+
+@keyframes fadeEffect {
+    from { opacity: 0.2 }
+    to { opacity: 1 }
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #bbb;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.active-dot {
+  background-color: #717171;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 16px;
+  font-size: 36px;
+  background: none; 
+  color: wait;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.nav-btn:hover {
+  color: #555; /* ciemniejszy odcień na hover */
+}
+
+.nav-btn.left {
+  left: 10px;
+}
+
+.nav-btn.right {
+  right: 10px;
+}
+
+.post-content p {
+    line-height: 1.6;
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+
+footer, .footer {
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #333;
+    margin-top: auto;
+}
+
+/* Styl do post_detail.html  */
+
+.polaroid {
+  display: inline-block;
+  background: #fff;
+  border: 6px solid #fff;
+  border-bottom: 24px solid #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  margin: 20px;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow .3s;
+}
+.polaroid-img {
+  display: block;
+  width: 400px;
+  height: auto;
+}
+.caption {
+  text-align: left;
+  font-family: monospace;
+  font-size: 16px;
+  margin-top: 8px;
+  color: #333;
+}
+.polaroid:hover {
+  box-shadow: 0 16px 36px rgba(0,0,0,0.4);
+}
+.modalShow {
+  display: none; 
+  position: fixed; 
+  z-index: 999; 
+  left: 0; top: 0; width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+}
+.modal-content {
+  display: block; margin: 40px auto; max-width: 90vw; max-height: 85vh; border-radius: 12px; box-shadow: 0 4px 32px #000b;
+}
+.close {
+  position: fixed; top: 32px; right: 48px;
+  color: #fff; font-size: 48px; font-weight: bold; cursor: pointer; z-index: 1000;
+  text-shadow: 0 2px 8px #000a;
+}
+.close:hover { color: #ff4444; }
+

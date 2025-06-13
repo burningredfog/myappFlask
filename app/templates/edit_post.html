@@ -1,0 +1,68 @@
+{% extends 'base2.html' %}
+{% block title %}Edytuj post{% endblock %}
+
+{% block content %}
+  <div class="w3-container w3-padding" style="max-width: 600px;">
+	<h2>Edytuj post</h2>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="w3-margin-bottom">
+      {{ form.title.label }}
+      {{ form.title(class="w3-input w3-small w3-border") }}
+      {% for error in form.title.errors %}
+        <div class="form-error w3-text-red">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+	<!-- Quill Editor (div + ukryte pole) -->
+	<div class="w3-margin-bottom">
+    <div id="editor" style="height: 200px;">{{ form.content.data|safe }}</div>
+    <input type="hidden" name="content" id="content-hidden">
+	</div>
+    {% if form.category_id %}
+    <div class="w3-margin-bottom">
+      {{ form.category_id.label }}
+      {{ form.category_id(class="w3-input w3-small w3-border") }}
+      {% for error in form.category_id.errors %}
+        <div class="form-error w3-text-red">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <button type="submit" class="w3-button w3-black">Zapisz</button>
+    </div>
+  </form>
+  
+  <!-- Quill CDN -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<script>
+  // Inicjalizacja Quill
+  const quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Edytuj treść posta...',
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link', 'image'],
+        ['clean']
+      ]
+    }
+  });
+
+  // Wypełnienie edytora istniejącą treścią (jeśli jest, choć ty już ją podałeś w HTML)
+  const hiddenInput = document.getElementById('content-hidden');
+
+  // Przy wysłaniu formularza – skopiuj treść HTML z edytora do ukrytego pola
+  document.querySelector('form').addEventListener('submit', function () {
+    hiddenInput.value = quill.root.innerHTML;
+  });
+</script>
+
+  </div>
+{% endblock %}
+
+

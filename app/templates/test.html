@@ -1,0 +1,59 @@
+{% extends 'base2.html' %}
+
+{% block title %}Strona Testowa{% endblock %}
+
+{% block content %}
+
+<!-- TEST.html -->
+
+<div class="w3-container w3-bottombar w3-light-grey" id="test" style="width:100% height:500px;">
+
+<header class="w3-container">
+  <h2>Kontakt</h2>
+</header>
+
+<div class="w3-row w3-border w3-content w3-card-4 w3-round-large" style="height:460px;">
+
+  <div class="w3-third w3-container" style="width:30%">
+  
+  <!--  DIV-LEFT -->
+  
+  </div>
+  
+  <div class="w3-third w3-container" style="width:40%">
+  
+   <!-- DIV-CENTER -->
+   
+   <h4>Jesli masz jakies pytania napisz do nas!</h4>
+   
+	<form action="/action_page.php" target="_blank" class="w3-panel">
+        <div class="w3-section">
+          <label>Name</label>
+          <input class="w3-input w3-small" type="text" name="Name" required>
+        </div>
+        <div class="w3-section">
+          <label>Email</label>
+          <input class="w3-input w3-small" type="text" name="Email" required>
+        </div>
+        <div class="w3-section">
+          <label>Message</label>
+          <input class="w3-input w3-small" type="textarea" name="Message" required>
+        </div>
+        <button type="submit" class="w3-button w3-small w3-block w3-black w3-margin-bottom">Wyślij</button>
+    </form>	
+	
+  </div>
+  
+  <div class="w3-third w3-container" style="width:30%">
+  
+    <!--DIV-RIGHT-->
+	
+  </div>
+  
+</div>
+
+<br><br>
+
+</div>
+
+{% endblock %}

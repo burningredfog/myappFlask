@@ -1,0 +1,63 @@
+<!-- base2.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>{% block title %}Moja Aplikacja{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='w3c.css') }}">
+</head>
+<body class="w3-light-grey" style="min-height: 100vh; display: flex; flex-direction: column;">
+<!-- HEADER + MENU -->
+<div class="w3-container w3-black" style="padding:0; margin:0;">
+    {% include 'slideshow.html' %}
+    <div class="w3-container">
+	
+		<header> 
+			<h1>Moja Aplikacja</h1>
+		</header>
+	
+     {% include 'header.html' %} 
+	 
+    </div>
+</div>
+<!-- FLASH + CONTENT -->
+        <main style="flex: 1;">
+
+            <div class="w3-container w3-animate-top">
+         
+                {% block content %}{% endblock %}
+            
+            </div>
+        </main>
+
+      <!-- FOOTER -->
+    {% include 'footer.html' %}
+    {% include 'modal_login.html' %}
+    {% include 'modal_register.html' %}
+
+
+    <!-- Skrypt -->
+    {% include 'scripts.html' %}
+	
+	
+	{% if show_modal_login %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    openModal(); // otwiera modal logowania
+  });
+</script>
+{% endif %}
+
+{% if show_modal_register %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    switchModal('register'); // otwiera modal rejestracji
+  });
+</script>
+{% endif %}
+
+</body>
+</html>

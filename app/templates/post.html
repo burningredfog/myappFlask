@@ -1,0 +1,25 @@
+<!-- app/templates/post.html -->
+{% extends "base2.html" %}
+
+<article class="w3-container, width:400px;">
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  <h2>{{ post.title }}</h2>
+  
+  <p><strong>Kategoria:</strong> {{ post.category.name if post.category else 'Brak' }}</p>
+  
+  <div>{{ post.content|safe }}</div>
+  
+  <div class="post-actions">
+    <a href="{{ url_for('main.index') }}" class="w3-button w3-black">←Powrót do bloga</a> |
+    <a href="{{ url_for('main.edit_post', post_id=post.id) }}">Edytuj</a> |
+    <form method="POST" action="{{ url_for('main.delete_post', post_id=post.id) }}" style="display:inline;" onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?');">
+        <button type="submit" class="w3-button w3-black">Usuń</button>
+    </form>
+  </div>
+
+{% endblock %}
+<br><br>
+</article>

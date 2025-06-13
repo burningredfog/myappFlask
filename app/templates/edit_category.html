@@ -1,0 +1,34 @@
+{% extends 'base2.html' %}
+{% block title %}Edytuj kategorię{% endblock %}
+
+{% block content %}
+<div class="w3-container" style="max-width:400px;margin:auto;">
+  <div class="w3-card-4 w3-white w3-animate-top" style="padding:32px 24px;">
+    <header class="w3-container w3-black" style="margin:-32px -24px 24px -24px;padding:24px 16px 8px 16px;">
+      <h3 class="w3-text-white" style="margin:0;">Edytuj kategorię</h3>
+    </header>
+	
+	<!-- Komunikaty flash -->
+    {% include 'flash_messages.html' %}
+	
+    <form method="POST" autocomplete="off">
+      {{ form.hidden_tag() }}
+      <div class="w3-section">
+        {{ form.name.label(class="w3-text-grey") }}
+        {{ form.name(class="w3-input w3-border w3-round w3-small", placeholder="Nazwa kategorii") }}
+        {% for error in form.name.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="w3-bar w3-margin-top">
+        <button type="submit" class="w3-bar-item w3-button w3-black w3-hover-orange w3-text-white w3-small" style="width:48%;">
+          Zapisz zmiany
+        </button>
+        <a href="{{ url_for('main.admin_categories') }}" class="w3-bar-item w3-button w3-black w3-hover-orange w3-text-white w3-small" style="width:48%;">
+          Anuluj
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

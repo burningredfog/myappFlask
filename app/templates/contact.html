@@ -1,0 +1,52 @@
+<!-- contact.html -->
+
+{% extends "base2.html" %}
+
+{% block title %}Kontakt{% endblock %}
+
+{% block content %}
+    
+	
+	<div class="w3-container w3-bottombar w3-border-gray w3-small w3-padding" style="max-width:80%; height:500px; margin-left:auto; margin-right:auto;">
+    <h2>Kontakt</h2>
+	<p>Napisz do nas.</p>
+	
+		<div style="max-width:450px;">
+    <!-- Komunikaty flash -->
+    {% include 'flash_messages.html' %}
+	
+    <form method="post" class="w3-container w3-card-4 w3-light-grey w3-padding">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(class="w3-input w3-small") }}
+            {% for error in form.name.errors %}
+              <span class="w3-text-red w3-small">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(class="w3-input w3-small") }}
+            {% for error in form.email.errors %}
+              <span class="w3-text-red w3-small">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.message.label }}<br>
+            {{ form.message(class="w3-input w3-small") }}
+            {% for error in form.message.errors %}
+              <span class="w3-text-red w3-small">{{ error }}</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit(class="w3-button w3-small w3-black") }}
+        </p>
+    </form>
+	
+		</div>
+</div>
+	
+	
+	
+{% endblock %}

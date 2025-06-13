@@ -1,0 +1,17 @@
+<div class="w3-display-container" style="width:100%;">
+		
+  <img src="{{ url_for('static', filename='slides/IMG2025_01.jpg') }}" class="mySlides" style="width:100%;">
+  <img src="{{ url_for('static', filename='slides/IMG2025_02.jpg') }}" class="mySlides" style="width:100%;">
+  <img src="{{ url_for('static', filename='slides/IMG2024_03.jpg') }}" class="mySlides" style="width:100%;">
+	
+  <button class="nav-btn left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="nav-btn right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+       
+<div class="w3-center w3-section" style="text-align: center; margin-top: 12px;">
+
+  <span class="dot" onclick="currentDiv(1)"></span>
+  <span class="dot" onclick="currentDiv(2)"></span>
+  <span class="dot" onclick="currentDiv(3)"></span>
+  
+</div>

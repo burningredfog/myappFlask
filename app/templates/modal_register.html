@@ -1,0 +1,50 @@
+<!-- === modal_register.html === -->
+<div id="modal-register" class="w3-modal" onclick="closeOnOutside(event)">
+    <div class="w3-modal-content w3-animate-top w3-card-4" style="max-width:400px" onclick="event.stopPropagation()">
+        <div class="w3-container w3-black">
+            <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
+            <h2>Rejestracja</h2>
+        </div>
+        <div class="w3-container w3-small w3-padding">
+            <!-- Komunikaty flash -->
+            {% include 'flash_messages.html' %}
+            <!-- Błędy formularza -->
+            {% for field, errors in register_form.errors.items() %}
+              {% for error in errors %}
+                <div class="w3-panel w3-red w3-small">{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
+            <form method="post" action="{{ url_for('main.register') }}">
+                {{ register_form.hidden_tag() }}
+
+                <p>
+                    {{ register_form.username.label }}
+                    {{ register_form.username(class="w3-input w3-small w3-border") }}
+                </p>
+
+                <p>
+                    {{ register_form.email.label }}
+                    {{ register_form.email(class="w3-input w3-small w3-border") }}
+                </p>
+
+                <p>
+                    {{ register_form.password.label }}
+                    {{ register_form.password(class="w3-input w3-small w3-border") }}
+                </p>
+
+                <p>
+                    {{ register_form.confirm.label }}
+                    {{ register_form.confirm(class="w3-input w3-small w3-border") }}
+                </p>
+
+                <p class="w3-center w3-small">
+                    {{ register_form.submit(class="w3-button w3-black w3-margin-top") }}
+                </p>
+
+                <p class="w3-center w3-small">
+                    Masz już konto? <a href="#" onclick="switchModal('login')">Zaloguj się</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<!-- posts_panel.html -->
+
+{% extends 'base2.html' %}
+
+{% block title %}Panel postów{% endblock %}
+
+{% block content %}
+
+<div class="w3-container w3-bottombar w3-border-gray w3-small w3-padding" style="max-width:80%; height:500px; margin-left:auto; margin-right:auto; overflow-y:auto;">
+
+  <h1 class="w3-container">Panel postów</h1>
+
+	<!-- Komunikaty flash -->
+            {% include 'flash_messages.html' %}
+
+  <div class="w3-row w3-margin-bottom w3-small w3-bold w3-border-bottom" style="display:flex; font-weight:600;">
+    <div style="flex:0 0 40px;">#</div>
+    <div style="flex:1;">Tytuł</div>
+    <div style="flex:1;">Kategoria</div>
+    <div style="flex:1;">Data</div>
+    <div style="flex:1.5;">Akcje</div>
+  </div>
+
+  {% for post in posts %}
+  <div class="w3-row w3-padding-small w3-border-bottom w3-hover-orange" style="display:flex; align-items:center;">
+    <div style="flex:0 0 40px;">{{ post.id }}</div>
+    <div style="flex:1;">{{ post.title }}</div>
+    <div style="flex:1;">{{ post.category.name if post.category else 'Brak' }}</div>
+    <div style="flex:1;">{{ post.created_at.strftime('%Y-%m-%d') if post.created_at else 'Brak' }}</div>
+    <div style="flex:1.5;">
+      <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="w3-button w3-black w3-small" style="margin-right:4px;">Podgląd</a>
+      <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="w3-button w3-black w3-small" style="margin-right:4px;">Edytuj</a>
+      <form method="POST" action="{{ url_for('main.delete_post', post_id=post.id) }}" style="display:inline;" onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?');">
+        <button type="submit" class="w3-button w3-black w3-small">Usuń</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+
+  <a href="{{ url_for('main.add_post') }}" class="w3-button w3-black w3-small w3-margin-top">Dodaj nowy post</a>
+
+</div>
+
+{% endblock %}

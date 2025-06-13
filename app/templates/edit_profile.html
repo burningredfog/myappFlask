@@ -1,0 +1,41 @@
+<!-- edit_profile.html -->
+
+{% extends 'base2.html' %}
+{% block title %}Edytuj profil{% endblock %}
+
+{% block content %}
+
+<div class="w3-container" style="max-width:550px;margin:auto;">
+  <div class="w3-card-4 w3-round-large w3-white w3-animate-top" style="padding:32px 24px;">
+
+    <header class="w3-container w3-black w3-round-large" style="margin:-32px -24px 24px -24px;padding:24px 16px 8px 16px;">
+      <h3 class="w3-text-white" style="margin:0;">Edytuj profil</h3>
+    </header>
+
+    <form method="POST" id="edit-profile-form" autocomplete="off">
+      {{ form.hidden_tag() }}
+
+      <div class="w3-section">
+        {{ form.email.label(class="w3-text-grey") }}
+        {{ form.email(class="w3-input w3-border w3-round w3-small", placeholder="Adres e-mail") }}
+        {% for error in form.email.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-section">
+        <label for="editor" class="w3-text-grey">O mnie</label>
+        <div id="editor" style="height: 200px;">{{ form.bio.data|safe }}</div>
+        <input type="hidden" name="bio" id="bio-hidden" value="{{ form.bio.data|safe }}">
+        {% for error in form.bio.errors %}
+          <span class="w3-text-red w3-small">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="w3-bar w3-margin-top">
+        {{ form.submit(class="w3-bar-item w3-button w3-black w3-round-large w3-hover-orange w3-text-white w3-small", style="width:100%;") }}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

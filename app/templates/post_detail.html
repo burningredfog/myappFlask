@@ -1,0 +1,57 @@
+<!-- post_detail.html -->
+
+{% extends 'base2.html' %}
+
+{% block title %}Post: {{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="w3-container w3-bottombar w3-border-gray w3-small w3-padding" style="max-width:80%; height:auto; margin-left:auto; margin-right:auto;">
+  <section class="w3-container w3-row-padding" style="max-width:650px;">
+    <h1>{{ post.title }}</h1>
+    <p class="w3-small w3-text-black">
+      Kategoria: {{ post.category.name if post.category else 'Brak' }}<br>
+      Data dodania: {{ post.created_at.strftime('%Y-%m-%d') if post.created_at else 'Brak' }}
+    </p>
+    {% if post.image_filename %}
+      <div class="w3-container w3-margin-bottom">
+        <!-- Miniatura polaroida -->
+			<div class="polaroid" onclick="openPhotoModal('{{ url_for('static', filename='uploads/' ~ post.image_filename) }}')">
+				<img src="{{ url_for('static', filename='uploads/' ~ post.image_filename) }}" alt="{{ post.title }}" class="polaroid-img">
+			</div>
+			<!-- Modal -->
+			<div id="photo-modal" class="modalShow" onclick="closePhotoModal(event)">
+				<span class="close" onclick="closePhotoModal(event)">&times;</span>
+				<img class="modal-content" id="photo-modal-image">
+			</div>
+      </div>
+    {% endif %}
+    <div class="w3-margin-bottom" style="font-size:1.12em; line-height:1.8;">
+      {{ post.content | markdown | safe }}
+    </div>
+    {% if current_user.is_authenticated and current_user.is_admin %}
+      <div class="w3-bar w3-margin-bottom">
+        <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="w3-button w3-black w3-small">Edytuj</a>
+        <form method="POST" action="{{ url_for('main.delete_post', post_id=post.id) }}" style="display:inline;" onsubmit="return confirm('Usunąć post?');">
+          <button type="submit" class="w3-button w3-black w3-small">Usuń</button>
+        </form>
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+<script>
+function openPhotoModal(imgSrc) {
+  var modal = document.getElementById('photo-modal');
+  var modalImg = document.getElementById('photo-modal-image');
+  modalImg.src = imgSrc;
+  modal.style.display = "block";
+}
+function closePhotoModal(event) {
+  // zamyka tylko gdy klikniesz na tło lub X
+  if(event.target.classList.contains('modalShow') || event.target.classList.contains('close')) {
+    document.getElementById('photo-modal').style.display = "none";
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!--user_list.html -->
+
+{% extends 'base2.html' %}
+
+{% block title %}Lista użytkowników{% endblock %}
+
+{% block content %}
+
+<div class="w3-container w3-bottombar w3-border-gray w3-small w3-padding" style="max-width:80%; height:500px; margin-left:auto; margin-right:auto;">
+
+<h1 class="w3-text-black">Użytkownicy</h1>
+
+<div class="w3-responsive" style="max-width:700px; margin:auto;">
+
+	<!-- Komunikaty flash -->
+            {% include 'flash_messages.html' %}
+
+  <div class="w3-card-4 w3-padding-0 w3-light-grey" style="overflow:hidden;">
+    <!-- Nagłówek tabeli -->
+    <div class="w3-row w3-black w3-padding w3-small" style="font-weight:bold;">
+      <div class="w3-col s2 m1">ID</div>
+      <div class="w3-col s4 m3">Nazwa</div>
+      <div class="w3-col s6 m4">Email</div>
+      <div class="w3-col s4 m2">Admin</div>
+      <div class="w3-col s6 m2" style="text-align:center;">Akcje</div>
+    </div>
+    {% for user in users %}
+      <div class="w3-row w3-light-grey w3-padding w3-border-bottom w3-hover-orange"
+           style="align-items:center; margin:8px 8px 0 8px;">
+        <div class="w3-col s2 m1" style="padding-top:8px;display:flex;align-items:center;justify-content:center;">{{ user.id }}</div>
+        <div class="w3-col s4 m3" style="padding-top:8px;display:flex;align-items:center;">{{ user.username }}</div>
+        <div class="w3-col s6 m4" style="padding-top:8px;display:flex;align-items:center;">{{ user.email or '—' }}</div>
+        <div class="w3-col s4 m2" style="padding-top:8px;display:flex;align-items:center;justify-content:center;">{{ 'Tak' if user.is_admin else 'Nie' }}</div>
+        <div class="w3-col s6 m2" style="display:flex;align-items:center;justify-content:center;gap:4px;min-height:36px;">
+          {% if user.id != current_user.id %}
+            <a href="{{ url_for('main.edit_user', user_id=user.id) }}"
+               class="w3-button w3-black w3-small" style="min-width:60px;text-align:center;">Edytuj</a>
+            <form method="POST" action="{{ url_for('main.delete_user', user_id=user.id) }}"
+                  style="display:inline;" onsubmit="return confirm('Na pewno usunąć użytkownika {{ user.username }}?');">
+              <button type="submit" class="w3-button w3-black w3-small" style="min-width:60px;text-align:center;">Usuń</button>
+            </form>
+          {% else %}
+            <span class="w3-text-black w3-small" style="white-space:nowrap;">Nie można usunąć siebie</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    <a href="{{ url_for('main.add_user') }}" class="w3-button w3-black w3-small w3-margin-top">Dodaj użytkownika</a>
+  </div>
+</div>
+</div>
+{% endblock %}

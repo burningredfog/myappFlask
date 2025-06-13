@@ -1,0 +1,79 @@
+<!--- app/templates/index.html -->
+
+{% from "macros/pagination.html" import render_pagination %}
+
+{% extends 'base2.html' %}
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+  <div class="w3-container">
+    <h2 class="w3-margin-bottom">Blog</h2>
+
+    {# --- WYŚWIETLANIE KATEGORII --- #}
+    {% if categories %}
+      <div class="w3-bar w3-light-grey w3-margin-bottom" style="border-radius: 5px;">
+        <a href="{{ url_for('main.index') }}"
+           class="w3-bar-item w3-button {% if not selected_category %}w3-orange w3-text-white{% endif %}">Wszystkie</a>
+        {% for category in categories %}
+          <a href="{{ url_for('main.category', category_id=category.id) }}"
+             class="w3-bar-item w3-button {% if selected_category and selected_category.id == category.id %}w3-orange w3-text-white{% endif %}">
+            {{ category.name }}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('main.add_post') }}" class="w3-button w3-black w3-small w3-margin-bottom">Dodaj nowy wpis</a>
+    {% endif %}
+
+    {% if posts %}
+      <div class="w3-row-padding">
+        {% for post in posts %}
+          <div class="w3-third w3-margin-bottom">
+            <div class="w3-card w3-white">
+              {% if post.image_url %}
+                <img src="{{ url_for('static', filename=post.image_url) }}"
+                     alt="Miniatura"
+                     style="width:120px; object-fit: cover;">XXX
+              {% endif %}
+              <div class="w3-container">
+                <h4>{{ post.title }}</h4>
+                <p class="w3-small w3-text-grey">
+                  {{ post.created_at.strftime('%Y-%m-%d') }} | Autor:<b> {{ post.author.username }}</b>
+                  {% if post.category %}
+                    | Kategoria: <b>{{ post.category.name }}</b>
+                  {% endif %}
+                </p>
+                <br>
+                <p>{{ post.content | truncate_html(120) }}{% if post.content|length > 120 %}...{% endif %}</p>
+                <a href="{{ url_for('main.post_detail', post_id=post.id) }}" class="w3-button w3-black w3-small">Czytaj
+                  dalej</a>
+                <br><br>
+                {% if current_user.is_authenticated and (current_user.id == post.author_id or current_user.is_admin) %}
+                  <div class="w3-margin-top w3-small">
+                    <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="w3-button w3-black w3-small">Edytuj</a>
+                    |
+                    <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="post"
+                          style="display:inline;" onsubmit="return confirm('Czy na pewno chcesz usunąć ten post?');">
+                      <button type="submit" class="w3-button w3-black w3-small">Usuń</button>
+                    </form>
+                    <br><br>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {# paginacja: endpoint zmieniamy w zależności czy to kategoria czy wszystkie #}
+      {{ render_pagination(pagination, endpoint=pagination.endpoint) }}
+    {% else %}
+  <p class="w3-text-grey">Brak wpisów.
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('main.add_post') }}" class="w3-button w3-black w3-small">Dodaj pierwszy wpis</a>.
+    {% endif %}
+  </p>
+{% endif %}
+  </div>
+{% endblock %}

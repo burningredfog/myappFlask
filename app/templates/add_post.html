@@ -1,0 +1,53 @@
+<!-- add_post.html -->
+
+{% extends 'base2.html' %}
+{% block title %}Dodaj post{% endblock %}
+
+{% block content %}
+<div class="w3-container w3-padding" style="max-width: 600px;">
+  <h2>Dodaj post</h2>
+  
+  <!-- Komunikaty flash -->
+  {% include 'flash_messages.html' %}
+
+  <!-- ZMIANA: enctype! -->
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="w3-margin-bottom">
+      {{ form.title.label }}
+      {{ form.title(class="w3-input w3-small w3-border") }}
+      {% for error in form.title.errors %}
+        <div class="form-error w3-text-red">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="w3-margin-bottom">
+      <label for="editor">Treść</label>
+      <div id="editor" style="height: 200px;"></div>
+      <input type="hidden" name="content" id="content-hidden">
+    </div>
+
+    {% if form.category_id %}
+    <div class="w3-margin-bottom">
+      {{ form.category_id.label }}
+      {{ form.category_id(class="w3-select w3-small w3-border") }}
+      {% for error in form.category_id.errors %}
+        <div class="form-error w3-text-red">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- DODAJ POLE IMAGE -->
+    <div class="w3-margin-bottom">
+      {{ form.image.label }}
+      {{ form.image(class="w3-input w3-small w3-border") }}
+      {% for error in form.image.errors %}
+        <div class="form-error w3-text-red">{{ error }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="w3-button w3-black">Dodaj</button>
+  </form>
+</div>
+{% endblock %}

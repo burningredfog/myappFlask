@@ -1,0 +1,14 @@
+Szybka instrukcja użycia:
+Upewnij się, że masz aktywne środowisko virtualenv:
+
+source venv/bin/activate
+
+chmod +x reset_db.sh
+./reset_db.sh
+
+Upewnij się też, że masz ustawione:
+export FLASK_APP=manage.py
+export FLASK_ENV=development
+
+(Albo umieść te linie w .flaskenv.)
+

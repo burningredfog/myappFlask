@@ -1,0 +1,65 @@
+<!-- header.html -->
+{% set current = request.endpoint %}
+{% if current_user.is_authenticated and current_user.is_admin %}
+  <nav class="w3-bar w3-black w3-bar-item">
+    <span class="w3-bar-item" style="font-weight:bold">Admin Panel</span>
+    <a href="{{ url_for('main.index') }}"
+       class="w3-button w3-bar-item {% if current=='main.index' %}w3-orange w3-text-white{% endif %}">Strona główna</a>
+    <a href="{{ url_for('main.about') }}"
+       class="w3-button w3-bar-item {% if current=='main.about' %}w3-orange w3-text-white{% endif %}">O nas</a>
+    <a href="{{ url_for('main.contact') }}"
+       class="w3-button w3-bar-item {% if current=='main.contact' %}w3-orange w3-text-white{% endif %}">Kontakt</a>
+    <a href="{{ url_for('main.admin_panel') }}"
+       class="w3-button w3-bar-item {% if current=='main.admin_panel' %}w3-orange w3-text-white{% endif %}">Panel administratora</a>
+    <a href="{{ url_for('main.posts_panel') }}"
+       class="w3-button w3-bar-item {% if current=='main.posts_panel' %}w3-orange w3-text-white{% endif %}">Panel wpisów</a>
+    <a href="{{ url_for('main.add_post') }}"
+       class="w3-button w3-bar-item {% if current=='main.add_post' %}w3-orange w3-text-white{% endif %}">Dodaj post</a>
+    <a href="{{ url_for('main.admin_users') }}"
+       class="w3-button w3-bar-item {% if current=='main.admin_users' %}w3-orange w3-text-white{% endif %}">Zarządzaj użytkownikami</a>
+    <a href="{{ url_for('main.add_user') }}"
+       class="w3-button w3-bar-item {% if current=='main.add_user' %}w3-orange w3-text-white{% endif %}">Dodaj użytkownika</a>
+    <a href="{{ url_for('main.add_category') }}"
+       class="w3-button w3-bar-item {% if current=='main.add_category' %}w3-orange w3-text-white{% endif %}">Dodaj kategorię</a>
+    <a href="{{ url_for('main.profile') }}"
+       class="w3-button w3-bar-item {% if current=='main.profile' %}w3-orange w3-text-white{% endif %}">Profil</a>
+    <a href="{{ url_for('main.change_password') }}"
+       class="w3-button w3-bar-item {% if current=='main.change_password' %}w3-orange w3-text-white{% endif %}">Zmień hasło</a>
+    <a href="{{ url_for('main.logout') }}"
+       class="w3-button w3-bar-item">Wyloguj</a>
+  </nav>
+
+{% elif current_user.is_authenticated %}
+
+  <nav class="w3-bar w3-black w3-bar-item">
+    <span class="w3-bar-item" style="font-weight:bold">Panel</span>
+    <a href="{{ url_for('main.index') }}"
+       class="w3-button w3-bar-item {% if current=='main.index' %}w3-orange w3-text-white{% endif %}">Strona główna</a>
+    <a href="{{ url_for('main.about') }}"
+       class="w3-button w3-bar-item {% if current=='main.about' %}w3-orange w3-text-white{% endif %}">O nas</a>
+    <a href="{{ url_for('main.contact') }}"
+       class="w3-button w3-bar-item {% if current=='main.contact' %}w3-orange w3-text-white{% endif %}">Kontakt</a>
+    <a href="{{ url_for('main.add_post') }}"
+       class="w3-button w3-bar-item {% if current=='main.add_post' %}w3-orange w3-text-white{% endif %}">Dodaj post</a>
+    <a href="{{ url_for('main.profile') }}"
+       class="w3-button w3-bar-item {% if current=='main.profile' %}w3-orange w3-text-white{% endif %}">Profil</a>
+    <a href="{{ url_for('main.change_password') }}"
+       class="w3-button w3-bar-item {% if current=='main.change_password' %}w3-orange w3-text-white{% endif %}">Zmień hasło</a>
+    <a href="{{ url_for('main.logout') }}"
+       class="w3-button w3-bar-item">Wyloguj</a>
+  </nav>
+
+{% else %}
+
+  <nav class="w3-bar w3-black w3-bar-item">
+    <span class="w3-bar-item" style="font-weight:bold">Witaj</span>
+    <a href="{{ url_for('main.index') }}"
+       class="w3-button w3-bar-item {% if current=='main.index' %}w3-orange w3-text-white{% endif %}">Strona główna</a>
+    <a href="javascript:void(0)" onclick="openModal()" class="w3-button w3-bar-item">Zaloguj się</a>
+    <a href="{{ url_for('main.about') }}"
+       class="w3-button w3-bar-item {% if current=='main.about' %}w3-orange w3-text-white{% endif %}">O nas</a>
+    <a href="{{ url_for('main.contact') }}"
+       class="w3-button w3-bar-item {% if current=='main.contact' %}w3-orange w3-text-white{% endif %}">Kontakt</a>
+  </nav>
+
+{% endif %}

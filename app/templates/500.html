@@ -1,0 +1,8 @@
+{% extends 'base2.html' %}
+{% block title %}Coś poszło nie tak{% endblock %}
+{% block content %}
+  <h2>500 – Wewnętrzny błąd serwera</h2>
+  <p>Ups… coś poszło nie tak po naszej stronie.</p>
+  <p>Spróbuj ponownie później lub skontaktuj się z administratorem.</p>
+  <p><a href="{{ url_for('main.index') }}">← Wróć na stronę główną</a></p>
+{% endblock %}

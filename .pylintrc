@@ -1,0 +1,40 @@
+[MASTER]
+ignore=venv,migrations,__pycache__,instance
+load-plugins=pylint.extensions.docparams
+
+[MESSAGES CONTROL]
+# Wyłącz ostrzeżenia, które kolidują z Black/flake8
+disable=
+    C0114,  # Missing module docstring
+    C0115,  # Missing class docstring
+    C0116,  # Missing function or method docstring
+    R0903,  # Too few public methods
+    R0913,  # Too many arguments
+    R0914,  # Too many local variables
+    R0915,  # Too many statements
+    W0511,  # TODO found
+    C0301,  # Line too long
+    W0621,  # Redefining name from outer scope
+
+[FORMAT]
+# To dopasowanie do Black
+max-line-length=88
+indent-string='    '
+
+[DESIGN]
+max-args=6
+max-locals=15
+max-branches=12
+max-statements=50
+
+[REPORTS]
+output-format=colorized
+reports=no
+score=yes
+
+[TYPECHECK]
+ignored-modules=numpy,pandas
+
+[REFACTORING]
+# Nie przesadzamy z analizą refaktoryzacji
+max-nested-blocks=5

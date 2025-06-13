@@ -1,0 +1,40 @@
+<!--profile.html-->
+
+{% extends 'base2.html' %}
+
+{% block title %}Twój profil{% endblock %}
+
+{% block content %}
+<div class="w3-container" style="max-width:550px;margin:auto;"><br><br>
+  <div class="w3-card-4 w3-white w3-animate-top w3-padding" style="padding:32px 24px;">
+
+    <header class="w3-container w3-black" style="margin:-10px -16px 24px -16px; padding:16px;">
+      <h3 class="w3-text-white" style="margin:0;">Twój profil</h3>
+    </header>
+	
+	<!-- Komunikaty flash -->
+    {% include 'flash_messages.html' %}
+	
+    <div id="edit">
+      <div class="w3-container">
+        <h5 class="w3-text-black" style="font-weight:bold;">{{ user.username }}</h5>
+        <div class="w3-small">
+          <strong>Email:</strong>
+		  {{ user.email or 'Brak' }}
+		  </div>
+          <div class="w3-small profile-bio"><strong>Bio:</strong>
+          {% if user.bio %}
+            {{ user.bio | markdown | safe }}
+          {% else %}
+            Brak opisu
+          {% endif %}
+			</div>
+			<br><br>
+        <a href="{{ url_for('main.edit_profile') }}" class="w3-button w3-black w3-small w3-hover-orange">Edytuj profil</a>
+        <br><br>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

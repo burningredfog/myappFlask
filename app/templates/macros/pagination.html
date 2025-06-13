@@ -1,0 +1,26 @@
+
+{% macro render_pagination(pagination, endpoint) %}
+  {% if pagination.pages > 1 %}
+    <div class="w3-bar w3-center w3-padding">
+      {% if pagination.has_prev %}
+        <a href="{{ url_for(endpoint, page=pagination.prev_num) }}" class="w3-button w3-border">«</a>
+      {% endif %}
+
+      {% for page_num in pagination.iter_pages() %}
+        {% if page_num %}
+          {% if page_num == pagination.page %}
+            <span class="w3-button w3-black">{{ page_num }}</span>
+          {% else %}
+            <a href="{{ url_for(endpoint, page=page_num) }}" class="w3-button w3-border">{{ page_num }}</a>
+          {% endif %}
+        {% else %}
+          <span class="w3-button w3-border w3-disabled">…</span>
+        {% endif %}
+      {% endfor %}
+
+      {% if pagination.has_next %}
+        <a href="{{ url_for(endpoint, page=pagination.next_num) }}" class="w3-button w3-border">»</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
