@@ -1,8 +1,0 @@
-Co to jest pylint?
-pylint to narzędzie typu linter do Pythona, które:
-
-analizuje Twój kod pod kątem błędów logicznych i stylistycznych,
-
-podpowiada, gdzie łamiesz zasady PEP8,
-
-ostrzega przed nieużywanymi importami, zmiennymi, złą nazwą funkcji itd.
