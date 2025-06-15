@@ -145,3 +145,7 @@ class ContactForm(FlaskForm):
     email = StringField("Adres e-mail", validators=[DataRequired(), Email(), Length(max=120)])
     message = TextAreaField("Wiadomość", validators=[DataRequired(), Length(max=2000)])
     submit = SubmitField("Wyślij")
+
+class DeleteImageForm(FlaskForm):
+    """Formularz do usuwania zdjęcia z galerii (ochrona CSRF)."""
+    submit = SubmitField("Usuń")
