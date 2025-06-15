@@ -31,7 +31,10 @@ class Config:
     UPLOAD_FOLDER = os.path.join('static', 'uploads')
     THUMBNAIL_FOLDER = os.path.join('static', 'uploads', 'thumbs')
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    MAX_CONTENT_LENGTH = 2 * 1024 * 1024  # 2MB
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB
+    ALLOWED_MIME = {'image/jpeg', 'image/png', 'image/gif'}
+    MAX_SINGLE_FILE = 8 * 1024 * 1024  # 8MB na plik
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
